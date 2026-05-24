@@ -424,6 +424,13 @@ ul { list-style: none; }
 
 .article-thumb-area { margin-bottom: 20px; }
 
+.article-thumb-img {
+  width: 100%;
+  max-width: 460px;
+  border-radius: var(--radius);
+  display: block;
+}
+
 .article-thumb-placeholder {
   background: var(--color-bg-3);
   border: 1px dashed var(--color-border);
