@@ -1,4 +1,4 @@
-/* ===== Mobile Nav Toggle ===== */
+﻿/* ===== Mobile Nav Toggle ===== */
 (function () {
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('mainNav');
@@ -33,7 +33,7 @@
   container.innerHTML = '';
   genres.forEach((g) => {
     const a = document.createElement('a');
-    a.href = `/genre.html?tag=${encodeURIComponent(g)}`;
+    a.href = `genre.html?tag=${encodeURIComponent(g)}`;
     a.className = 'genre-tag';
     a.textContent = g;
     container.appendChild(a);
