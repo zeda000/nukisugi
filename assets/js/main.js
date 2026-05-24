@@ -56,15 +56,19 @@
  *   &output=json
  */
 const DMM = {
-  affiliateId: '', // TODO: DMMアフィリエイトIDをセット
-  apiId: '',       // TODO: DMM API IDをセット
+  affiliateId: 'Asides-002',
+  apiId: '2RnzUS46RGXEDPSrugG1',
+
+  affiliateURL(productURL) {
+    return `https://al.dmm.co.jp/?lurl=${encodeURIComponent(productURL)}&af_id=${this.affiliateId}&ch=api&ch_id=link`;
+  },
 
   buildCardHTML(item, rank) {
     const rankBadge = rank ? `<span class="card-rank">${rank}位</span>` : '';
     const thumb = item.imageURL?.small || '';
     const title = item.title || '';
     const actress = item.iteminfo?.actress?.[0]?.name || '';
-    const url = item.affiliateURL || item.URL || '#';
+    const url = item.affiliateURL || this.affiliateURL(item.URL) || '#';
 
     return `
       <a href="${url}" class="card" target="_blank" rel="noopener noreferrer nofollow">
@@ -80,8 +84,9 @@ const DMM = {
   },
 
   async fetchItems(params = {}) {
-    const base = '/api/dmm';
     const query = new URLSearchParams({
+      api_id: this.apiId,
+      affiliate_id: this.affiliateId,
       site: 'FANZA',
       service: 'digital',
       floor: 'videoa',
@@ -90,7 +95,7 @@ const DMM = {
       output: 'json',
       ...params,
     });
-    const res = await fetch(`${base}?${query}`);
+    const res = await fetch(`https://api.dmm.com/affiliate/v3/ItemList?${query}`);
     if (!res.ok) throw new Error('API error');
     const data = await res.json();
     return data.result?.items || [];
