@@ -460,6 +460,97 @@ ul { list-style: none; }
   .dmm-banner-wide { flex-direction: column; text-align: center; }
 }
 
+/* Sale banner */
+.dmm-banner-sale {
+  background: linear-gradient(135deg, #1a0a00 0%, #3d1500 50%, #1a0a00 100%);
+  border: 1px solid #c45000;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  width: 100%;
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+.dmm-banner-sale:hover { opacity: 0.85; }
+.bn-sale-badge {
+  background: #ff6600;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 6px 8px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  letter-spacing: 1px;
+}
+.bn-sale-text { flex: 1; }
+.bn-sale-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ff8c00;
+  line-height: 1.3;
+}
+.bn-sale-sub {
+  font-size: 10px;
+  color: #ccc;
+  margin-top: 2px;
+}
+.dmm-banner-sale .bn-btn {
+  display: inline-block;
+  background: #ff6600;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Monthly plan banner */
+.dmm-banner-monthly {
+  background: linear-gradient(135deg, #001a0f 0%, #003d20 50%, #001a0f 100%);
+  border: 1px solid #00843a;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+  width: 100%;
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+.dmm-banner-monthly:hover { opacity: 0.85; }
+.bn-monthly-icon {
+  font-size: 26px;
+  color: #00c85a;
+  flex-shrink: 0;
+}
+.bn-monthly-text { flex: 1; }
+.bn-monthly-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #00c85a;
+  line-height: 1.3;
+}
+.bn-monthly-sub {
+  font-size: 10px;
+  color: #ccc;
+  margin-top: 2px;
+}
+.dmm-banner-monthly .bn-btn {
+  display: inline-block;
+  background: #00843a;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 5px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .actress-list li,
 .category-list li {
   padding: 6px 0;
