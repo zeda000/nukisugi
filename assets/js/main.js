@@ -65,7 +65,7 @@ const DMM = {
 
   buildCardHTML(item, rank) {
     const rankBadge = rank ? `<span class="card-rank">${rank}位</span>` : '';
-    const thumb = item.imageURL?.small || '';
+    const thumb = item.imageURL?.large || '';
     const title = item.title || '';
     const actress = item.iteminfo?.actress?.[0]?.name || '';
     const url = item.affiliateURL || this.affiliateURL(item.URL) || '#';
