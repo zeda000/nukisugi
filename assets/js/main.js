@@ -152,16 +152,16 @@ window.DMM = DMM;
   for (let i = 1; i <= MAX; i++) {
     const src = `${BASE}${i}.jpg`;
     const img = document.createElement('img');
-    img.src = src;
     img.alt = `サンプル画像 ${i}`;
-    img.loading = 'lazy';
-    img.className = 'sample-img';
+    img.className = 'sample-img sample-img-loading';
+    wrap.appendChild(img);
     img.addEventListener('load', () => {
       const idx = loaded.length;
       loaded.push(src);
+      img.classList.remove('sample-img-loading');
       img.addEventListener('click', () => openLightbox(idx));
-      wrap.appendChild(img);
     });
-    img.addEventListener('error', () => {});
+    img.addEventListener('error', () => { img.remove(); });
+    img.src = src;
   }
 })();
