@@ -103,3 +103,65 @@ const DMM = {
 };
 
 window.DMM = DMM;
+
+/* ===== Sample Image Gallery ===== */
+(function () {
+  const gallery = document.querySelector('.sample-gallery');
+  if (!gallery) return;
+
+  const cid = gallery.dataset.cid;
+  if (!cid) return;
+
+  const MAX = 12;
+  const BASE = `https://pics.dmm.co.jp/digital/video/${cid}/${cid}jp-`;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'sample-gallery-inner';
+  gallery.appendChild(wrap);
+
+  // ライトボックス用オーバーレイ
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  overlay.innerHTML = '<img class="lightbox-img"><button class="lightbox-close">&times;</button><button class="lightbox-prev">&#10094;</button><button class="lightbox-next">&#10095;</button>';
+  document.body.appendChild(overlay);
+
+  const lbImg   = overlay.querySelector('.lightbox-img');
+  const lbClose = overlay.querySelector('.lightbox-close');
+  const lbPrev  = overlay.querySelector('.lightbox-prev');
+  const lbNext  = overlay.querySelector('.lightbox-next');
+
+  let loaded = [];
+  let current = 0;
+
+  function openLightbox(idx) {
+    current = idx;
+    lbImg.src = loaded[current];
+    overlay.classList.add('is-open');
+  }
+  lbClose.addEventListener('click', () => overlay.classList.remove('is-open'));
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('is-open'); });
+  lbPrev.addEventListener('click', () => { current = (current - 1 + loaded.length) % loaded.length; lbImg.src = loaded[current]; });
+  lbNext.addEventListener('click', () => { current = (current + 1) % loaded.length; lbImg.src = loaded[current]; });
+  document.addEventListener('keydown', e => {
+    if (!overlay.classList.contains('is-open')) return;
+    if (e.key === 'ArrowLeft')  lbPrev.click();
+    if (e.key === 'ArrowRight') lbNext.click();
+    if (e.key === 'Escape')     lbClose.click();
+  });
+
+  for (let i = 1; i <= MAX; i++) {
+    const src = `${BASE}${i}.jpg`;
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `サンプル画像 ${i}`;
+    img.loading = 'lazy';
+    img.className = 'sample-img';
+    img.addEventListener('load', () => {
+      const idx = loaded.length;
+      loaded.push(src);
+      img.addEventListener('click', () => openLightbox(idx));
+      wrap.appendChild(img);
+    });
+    img.addEventListener('error', () => {});
+  }
+})();
