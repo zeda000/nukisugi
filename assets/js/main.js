@@ -1,4 +1,25 @@
-﻿/* ===== Mobile Nav Toggle ===== */
+﻿/* ===== Image Error Handling ===== */
+(function () {
+  // Handle broken images gracefully - add error class instead of hiding
+  document.addEventListener('error', function (e) {
+    const el = e.target;
+    if (el.tagName === 'IMG') {
+      el.classList.add('img-error');
+      el.removeAttribute('style'); // remove any inline display:none
+    }
+  }, true);
+
+  // Also fix any existing broken images on page load
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('img').forEach(function (img) {
+      if (img.complete && img.naturalWidth === 0) {
+        img.classList.add('img-error');
+      }
+    });
+  });
+})();
+
+/* ===== Mobile Nav Toggle ===== */
 (function () {
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('mainNav');
